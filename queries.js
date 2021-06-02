@@ -1,5 +1,5 @@
 require('dotenv').config();
-require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 const Pool = require('pg').Pool;
 const pool = new Pool({
@@ -82,7 +82,7 @@ const createEndpoint = (request, response) => {
 		if (error) {
 			throw error;
 		}
-		response.status(201);
+		response.status(201).send(`New bin created: ${identifier}`);
 	});
 	return identifier;
 };
@@ -90,6 +90,9 @@ const createEndpoint = (request, response) => {
 const createRequest = (request, response) => {
 	const id = request.params.uuid;
 	const body = request.body;
+
+	console.log('params: ', request.params);
+	console.log('id is : ', id);
 
 	pool.query('INSERT INTO requests (bin_id, request) VALUES ($1, $2)', [ id, body ], (error, results) => {
 		if (error) {

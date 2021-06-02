@@ -18,16 +18,15 @@ app.use(
 app.get('/', (request, response) => {
 	response.json({ info: 'Node.js, Express, and Postgres API' });
 });
-// // get all users
-// app.get('/users', db.getUsers);
-// // get specific user
-// app.get('/users/:id', db.getUserById);
-// // create user
-// app.post('/users', db.createUser);
-// // update user
-// app.put('/users/:id', db.updateUser);
-// // delete user
-// app.delete('/users/:id', db.deleteUser);
+
+// get bins for uuid
+app.get('/:uuid', db.getRequests);
+
+// create a new bin id
+app.post('/newBin', db.createEndpoint);
+
+// creare request for bin
+app.post('/:uuid', db.createRequest);
 
 app.listen(port, () => {
 	console.log(`App running on port ${port}.`);
