@@ -18,16 +18,16 @@ app.use(
 app.get('/', (request, response) => {
 	response.json({ info: 'Node.js, Express, and Postgres API' });
 });
-// get all users
-app.get('/users', db.getUsers);
-// get specific user
-app.get('/users/:id', db.getUserById);
-// create user
-app.post('/users', db.createUser);
-// update user
-app.put('/users/:id', db.updateUser);
-// delete user
-app.delete('/users/:id', db.deleteUser);
+// // get all users
+// app.get('/users', db.getUsers);
+// // get specific user
+// app.get('/users/:id', db.getUserById);
+// // create user
+// app.post('/users', db.createUser);
+// // update user
+// app.put('/users/:id', db.updateUser);
+// // delete user
+// app.delete('/users/:id', db.deleteUser);
 
 app.listen(port, () => {
 	console.log(`App running on port ${port}.`);
