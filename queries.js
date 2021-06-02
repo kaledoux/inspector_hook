@@ -68,11 +68,15 @@ const pool = new Pool({
 const getRequests = (request, response) => {
 	const id = request.params.uuid;
 
-	pool.query('SELECT request FROM requests WHERE bin_id = $1', [ id ], (error, results) => {
+	console.log('params: ', request.params);
+	console.log('id is : ', id);
+	console.log(typeof id);
+
+	pool.query('SELECT request FROM requests WHERE bin_id = ($1)', [ id ], (error, results) => {
 		if (error) {
 			throw error;
 		}
-		response.status(200).render('bin', { uuid: id, requests: results.rows });
+		response.status(200).send({ uuid: id, requests: results.rows });
 	});
 };
 
@@ -90,9 +94,6 @@ const createEndpoint = (request, response) => {
 const createRequest = (request, response) => {
 	const id = request.params.uuid;
 	const body = request.body;
-
-	console.log('params: ', request.params);
-	console.log('id is : ', id);
 
 	pool.query('INSERT INTO requests (bin_id, request) VALUES ($1, $2)', [ id, body ], (error, results) => {
 		if (error) {
