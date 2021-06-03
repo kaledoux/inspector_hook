@@ -4,6 +4,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('./queries');
 
+// use cors for cross origin
+const cors = require('cors');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -13,6 +16,9 @@ app.use(
 		extended : true
 	})
 );
+
+//cross origin
+app.use(cors());
 
 // root
 app.get('/', (request, response) => {

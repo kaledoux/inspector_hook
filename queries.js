@@ -86,7 +86,8 @@ const createEndpoint = (request, response) => {
 		if (error) {
 			throw error;
 		}
-		response.status(201).send(`New bin created: ${identifier}`);
+		response.status(201).json({ binID: identifier });
+		// response.status(201).send(`New bin created: ${identifier}`);
 	});
 	return identifier;
 };
