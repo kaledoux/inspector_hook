@@ -17,7 +17,7 @@ const getRequests = (request, response) => {
 	console.log('id is : ', id);
 	console.log(typeof id);
 
-	pool.query('SELECT request FROM requests WHERE bin_id = ($1)', [ id ], (error, results) => {
+	pool.query('SELECT (request, created_on) FROM requests WHERE bin_id = ($1)', [ id ], (error, results) => {
 		if (error) {
 			throw error;
 		}
