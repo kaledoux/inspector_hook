@@ -17,12 +17,17 @@ const getRequests = (request, response) => {
 	console.log('id is : ', id);
 	console.log(typeof id);
 
-	pool.query('SELECT (request, created_on) FROM requests WHERE bin_id = ($1)', [ id ], (error, results) => {
-		if (error) {
-			throw error;
+	pool.query(
+		'SELECT request, created_on FROM requests WHERE bin_id = ($1) ORDER BY created_on DESC',
+		[ id ],
+		(error, results) => {
+			if (error) {
+				throw error;
+			}
+			response.status(200).send({ uuid: id, requests: results.rows });
+			// response.status(200).send({ id: results.rows });
 		}
-		response.status(200).json({ uuid: id, requests: results.rows });
-	});
+	);
 };
 
 const createEndpoint = (request, response) => {
