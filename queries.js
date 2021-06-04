@@ -25,7 +25,6 @@ const getRequests = (request, response) => {
 				throw error;
 			}
 			response.status(200).send({ uuid: id, requests: results.rows });
-			// response.status(200).send({ id: results.rows });
 		}
 	);
 };
