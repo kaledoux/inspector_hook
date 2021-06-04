@@ -27,13 +27,13 @@ app.get('/', (request, response) => {
 });
 
 // get bins for uuid
-app.get('/:uuid', db.getRequests);
+app.get('/api/:uuid', db.getRequests);
 
 // create a new bin id
-app.post('/newBin', db.createEndpoint);
+app.post('/api/newBin', db.createEndpoint);
 
 // creare request for bin
-app.post('/:uuid', db.createRequest);
+app.post('/api/:uuid', db.createRequest);
 
 app.listen(port, () => {
 	console.log(`App running on port ${port}.`);
